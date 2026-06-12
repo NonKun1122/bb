@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>วิทยาลัยเทคนิคบางสะพาน</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #c8c8c8;
+  font-family: 'Sarabun', sans-serif;
+  min-height: 100vh;
+  padding: 2rem 1rem 3rem;
+}
+
+/* ── Page label ── */
+.page-label {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: .6rem;
+  margin-top: 2rem;
+}
+.page-label:first-child { margin-top: 0; }
+
+/* ── A4 Paper ── */
+.paper {
+  background: #fff;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  box-shadow: 0 4px 32px rgba(0,0,0,.28), 0 1px 4px rgba(0,0,0,.15);
+  padding: 3.2cm 2.5cm 2.5cm 3.5cm;
+  position: relative;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #111;
+}
+
+/* ═══════════════════════════════
+   PAGE 1 — LETTER
+═══════════════════════════════ */
+
+/* watermark */
+.paper-1::after {
+  content: 'ตัวอย่าง';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%) rotate(-30deg);
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(0,0,0,.04);
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: .2em;
+}
+
+/* top-right label */
+.wpoletter {
+  position: absolute;
+  top: 1.2cm;
+  right: 2.5cm;
+  font-size: 12px;
+  color: #333;
+}
+
+/* letter header row: ref | seal | address */
+.ltr-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
+  margin-bottom: 1.2rem;
+}
+.ltr-ref { font-size: 13.5px; color: #111; padding-top: .2rem; }
+.ltr-seal {
+  display: flex; flex-direction: column; align-items: center;
+  font-size: 52px; line-height: 1;
+  filter: grayscale(1);
+  opacity: .75;
+}
+.ltr-address {
+  text-align: right;
+  font-size: 13px;
+  line-height: 1.75;
+  color: #111;
+}
+
+.ltr-date { text-align: center; margin-bottom: .9rem; font-size: 14px; }
+
+.ltr-meta { font-size: 14px; margin-bottom: .25rem; }
+.ltr-meta span { margin-left: .5em; }
+
+.ltr-encl {
+  font-size: 13.5px;
+  margin-bottom: 1rem;
+}
+.ltr-encl span { margin-left: .5em; }
+
+.ltr-body p {
+  text-indent: 2.6em;
+  text-align: justify;
+  font-size: 14px;
+  margin-bottom: .6rem;
+  line-height: 1.75;
+}
+
+.ltr-close {
+  text-align: center;
+  margin-top: 1.4rem;
+  font-size: 14px;
+  padding-left: 6rem;
+}
+
+.ltr-sig {
+  text-align: center;
+  margin-top: 2.6rem;
+  padding-left: 6rem;
+  font-size: 13.5px;
+}
+.ltr-sig .name { font-size: 14px; }
+
+.ltr-footer {
+  margin-top: 2.4rem;
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: #222;
+}
+.ltr-footer .receiver {
+  text-align: right;
+  font-weight: 600;
+  margin-top: .5rem;
+}
+
+/* ═══════════════════════════════
+   PAGE 2 — EXAM
+═══════════════════════════════ */
+.paper-2 {
+  padding: 2.8cm 2.2cm 2cm 2.2cm;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.ex-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 14.5px;
+  margin-bottom: .5rem;
+  text-decoration: underline;
+}
+.ex-instr {
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: .4rem;
+}
+
+/* numbered section list */
+ol.main-list {
+  list-style: none;
+  margin-left: 0;
+}
+ol.main-list > li {
+  margin-bottom: .25rem;
+  display: flex;
+  gap: .35rem;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.n { flex-shrink: 0; min-width: 2.2em; font-weight: 600; }
+
+ol.sub-list {
+  list-style: none;
+  margin-left: 1.8em;
+}
+ol.sub-list > li {
+  display: flex;
+  gap: .35rem;
+  font-size: 13px;
+  line-height: 1.65;
+  margin-bottom: .1rem;
+}
+
+.bold { font-weight: 700; }
+.ul { text-decoration: underline; }
+
+/* inline spec tables */
+.spec-inline {
+  display: inline-flex;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+  margin-left: .5rem;
+  font-size: 12.5px;
+}
+.spec-inline span { text-decoration: underline; font-weight: 600; }
+
+/* section heading */
+.sec-head {
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: .8rem;
+  margin-bottom: .3rem;
+}
+
+/* horizontal rule between specs */
+hr.thin { border: none; border-top: 1px solid #bbb; margin: .5rem 0; }
+
+/* 2-col side-by-side for specs like 1.7.2 / 1.7.4 */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .2rem .5rem;
+  margin-left: 2.4em;
+  font-size: 13px;
+}
+
+/* bottom notes box */
+.notes-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.1rem;
+  align-items: start;
+}
+.notes-box {
+  border: 1.5px solid #222;
+  padding: .45rem .7rem;
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+.notes-box p { margin-bottom: .15rem; }
+
+.envelope-box {
+  border: 1.5px solid #222;
+  padding: .5rem .8rem;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.env-top { font-size: 11.5px; margin-bottom: .5rem; color: #333; }
+.env-recipient { margin-left: 2.5rem; }
+.env-field { font-style: italic; color: #1a3fa0; }
+
+/* responsive */
+@media (max-width: 520px) {
+  body { padding: 1rem .4rem 2rem; }
+  .paper { padding: 1.6rem 1rem 1.6rem 1.2rem; font-size: 12.5px; }
+  .paper-2 { padding: 1.4rem .9rem 1.4rem .9rem; font-size: 11.5px; }
+  .ltr-header { grid-template-columns: 1fr; gap: .4rem; }
+  .ltr-address { text-align: left; }
+  .ltr-seal { font-size: 38px; }
+  .wpoletter { top: .7cm; right: 1cm; }
+  .ltr-close, .ltr-sig { padding-left: 0; }
+  .two-col { grid-template-columns: 1fr; }
+  .notes-row { grid-template-columns: 1fr; }
+  ol.main-list > li, ol.sub-list > li { font-size: 11.5px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ──────────────────────────────────────
+     PAGE 1 : หนังสือราชการ
+────────────────────────────────────── -->
+<div class="page-label">หน้าที่ 1 — หนังสือราชการ</div>
+<div class="paper paper-1">
+  <div class="wpoletter">Wpøletter</div>
+
+  <div class="ltr-header">
+    <div class="ltr-ref">ที่ รง ๐๗๐๓/</div>
+    <div class="ltr-seal">🦅</div>
+    <div class="ltr-address">
+      สำนักงานการศึกษาพื้นฐาน<br>
+      และทดสอบความรู้สามารถ<br>
+      วิทยาลัยเทคนิคบางสะพาน<br>
+      อ.บ้านวังยาว ปข.๑๐๕๐๐
+    </div>
+  </div>
+
+  <div class="ltr-date">๘ กรกฎาคม ๒๕๖๘</div>
+
+  <div class="ltr-meta"><span class="bold">เรื่อง</span><span>ขอความร่วมมือเผยแพร่ความสามารถทางด้านกิจกรรมของนักเรียน</span></div>
+  <div class="ltr-meta"><span class="bold">เรียน</span></div>
+  <div style="height:.4rem"></div>
+  <div class="ltr-encl"><span class="bold">สิ่งที่แนบมาด้วย</span><span>แผ่นพับการออกแบบและเกณฑ์คะแนน</span></div>
+
+  <div class="ltr-body">
+    <p>ด้วยสำนักคณะกรรมการการศึกษาขั้นพื้นฐาน เป็นหน่วยงานดำเนินการและจัดทำมาตรฐานคุณวุฒิวิชาชีพ เพื่อเปิดโอกาสให้กับนักเรียน นิสิต นักศึกษา หรือประชาชนทั่วไปที่มีความสนใจ และมีประสบการณ์ในการทำงานหรือการฝึกอบรมในวิชาชีพต่าง ๆ ได้มาทำการสอบความสามารถทางวิชาการของนักเรียน เพื่อวัดระดับความรู้ ความสามารถในเชิงทักษะวิชาชีพ โดยผู้ที่ผ่านการทดสอบ จะได้รับหนังสือรับรองมาตรฐานฝีมือของตนเองอันเป็นประโยชน์ และสามารถขยายโอกาสในการทำงานต่อไป</p>
+    <p>อนึ่งเพื่อทำประโยชน์และประชาสัมพันธ์ และเผยแพร่ผลงานให้เป็นที่รู้จัก และยอมรับของบุคคลและหน่วยงานทั่วไป สำนักงานอาชีวศึกษาใคร่ขอความอนุเคราะห์เผยแพร่แผ่นพับการออกแบบและเกณฑ์คะแนน ให้ท่านได้ช่วยกรุณาเผยแพร่ประชาสัมพันธ์ และบอกกล่าวแก่ผู้ที่สนใจ ด้วยจักขอบคุณยิ่ง</p>
+    <p>จึงเรียนมาเพื่อโปรดพิจารณาและหวังเป็นอย่างยิ่งว่าคงได้รับความร่วมมือจากท่านด้วยดี และขอบคุณมา ณ โอกาสนี้ด้วย</p>
+  </div>
+
+  <div class="ltr-close">ขอแสดงความนับถือ</div>
+  <div class="ltr-sig">
+    <div style="height:2.4rem"></div>
+    <div class="name">(นายนิมิตร ศรียาภัย)</div>
+    <div>ผู้อำนวยการวิทยาลัยเทคนิคบางสะพาน</div>
+  </div>
+
+  <div class="ltr-footer">
+    กลุ่มงานฝ่ายบุคลากร วิทยาลัยเทคนิคบางสะพาน<br>
+    โทร ๐ ๒๕๕๓ ๐๘๕๓<br>
+    โทรสาร ๐ ๒๒๖๔ ๑๕๖๗
+    <div class="receiver">นางสาวจารุวรรณ ถึงเสียบญวน</div>
+  </div>
+</div>
+
+
+<!-- ──────────────────────────────────────
+     PAGE 2 : ข้อสอบปฏิบัติ
+────────────────────────────────────── -->
+<div class="page-label" style="margin-top:2.5rem">หน้าที่ 2 — ข้อสอบปฏิบัติ</div>
+<div class="paper paper-2">
+
+  <div class="ex-title">ข้อสอบปฏิบัติ ชุดที่ 1 การประมวลผลคำ (จดหมายเวียน)</div>
+  <div class="ex-instr">คำสั่ง &nbsp; พิมพ์จดหมายตามตัวอย่างที่แนบมาให้ &nbsp; 1. สร้าง Folder เป็นชื่อ นามสกุล ผู้เข้าทดสอบ เพื่อเก็บข้อมูลงานทำทั้งหมด</div>
+
+  <!-- ─── ส่วนที่ 1 ─── -->
+  <ol class="main-list">
+
+    <li>
+      <span class="n bold">1.1</span>
+      <span>
+        ตั้งค่าหน้ากระดาษ
+        <span class="spec-inline">
+          <span>Top 3 cm.</span>
+          <span>Bottom 1.25 cm.</span>
+          <span>Left 3.00 cm.</span>
+          <span>Right 2.00 cm.</span>
+        </span>
+        <br>
+        <span class="spec-inline" style="margin-left:0">
+          <span>Header 1.25 cm.</span>
+          <span>Footer 1.00 cm.</span>
+        </span>
+      </span>
+    </li>
+
+    <li>
+      <span class="n bold">1.2</span>
+      <span>กำหนดตำแหน่งทั้งเอกสารเป็น Left Tab ที่ 2.25 cm., 7.50 cm. และ 11.75 cm.</span>
+    </li>
+
+    <li>
+      <span class="n bold">1.3</span>
+      <span>กำหนดรูปแบบตัวอักษรเป็น TH SarabunPSK ขนาด 16 pt. ทั้งเอกสาร</span>
+    </li>
+
+    <li>
+      <span class="n bold">1.4</span>
+      <span>ที่ รง ๐๗๐๓/ อยู่มุมบนสุดด้านซ้าย ที่อยู่สำนักงานฯ อยู่ด้านขวา</span>
+    </li>
+
+    <li>
+      <span class="n bold">1.5</span>
+      <span>ใส่รูปภาพจากไฟล์ชื่อ Krut กำหนดขนาด สูง 3.5 cm. กว้าง 3 cm. โดยตั้งกึ่งกลางครุฑอยู่ที่ Tab 7.50 และตำแหน่งเท้าครุฑอยู่ระดับเดียวกับ ที่ รง ๐๗๐๓/</span>
+    </li>
+
+    <li>
+      <span class="n bold">1.6</span>
+      <span>กำหนดระยะ Tab</span>
+    </li>
+
+    <ol class="sub-list">
+      <li><span class="n">1.6.1</span><span>ย่อหน้า (Paragraph) ที่ 1, 2 และ 3 &nbsp;Tab ที่ &nbsp;2.25 cm.</span></li>
+      <li><span class="n">1.6.2</span><span>"ขอแสดงความนับถือ" Tab ที่ &nbsp;7.50 cm</span></li>
+    </ol>
+
+    <li>
+      <span class="n bold">1.7</span>
+      <span>กำหนดระยะห่างระหว่างบรรทัด (นอกเหนือจากที่กำหนดให้เว้นระยะห่างเป็น 1 บรรทัด)</span>
+    </li>
+
+    <ol class="sub-list">
+      <li><span class="n">1.7.1</span><span>ใต้ที่อยู่สำนักงานฯ และ ใต้วันที่ &nbsp;1.5 &nbsp;บรรทัด</span></li>
+      <li><span class="n">1.7.3</span><span>ใต้ "ขอแสดงความนับถือ" &nbsp;4 &nbsp;บรรทัด (ไม่ใช้ Enter)</span></li>
+    </ol>
+
+    <div class="two-col" style="margin-bottom:.2rem">
+      <div>1.7.2 ใต้พารากราฟที่ 3 &nbsp; 12 pt. (Point)</div>
+      <div>1.7.4 ใต้ <span class="ul">ขอแสดงความนับถือ</span> &nbsp;3.5 &nbsp;บรรทัด</div>
+    </div>
+
+    <li>
+      <span class="n bold">1.7.5</span>
+      <span>ระหว่าง เรื่อง, เรียน, สิ่งที่ส่งมาด้วย, ย่อหน้า (Paragraph) ที่ 1, 2 และ 3 เพิ่ม 6 pt. (Point)</span>
+    </li>
+
+    <li>
+      <span class="n bold">1.8</span>
+      <span>เรื่อง, เรียน, สิ่งที่ส่งมาด้วย ชิดซ้าย และข้อความภายในพารากราฟ กระจายแบบไทย (ชิดขอบทั้งซ้ายและขวา)</span>
+    </li>
+
+    <li>
+      <span class="n bold">1.9</span>
+      <span>ข้อความต่อจาก เรื่อง, เรียน และ สิ่งส่งมาด้วย ให้เว้น 2 จังหวะเคาะ</span>
+    </li>
+
+    <li>
+      <span class="n bold">1.10</span>
+      <span>กำหนด Tab จัดกึ่งกลาง (Center) คำว่า "ผู้อำนวยการวิทยาลัยเทคนิคบางสะพาน" ต้องอยู่กึ่งกลาง "ขอแสดงความนับถือ"</span>
+    </li>
+
+    <li>
+      <span class="n bold">1.11</span>
+      <span>พิมพ์ wp1letter ที่ Header มุมขวาด้านบน ตัวหนา และพิมพ์ชื่อผู้เข้าสอบใน Footer มุมขวาด้านล่าง ตัวหนา</span>
+    </li>
+
+    <li>
+      <span class="n bold">1.12</span>
+      <span>บันทึกไฟล์ข้อมูลชื่อ wp1letter ไฟล์ .docx &nbsp;และ wp2letter ไฟล์ .pdf</span>
+    </li>
+
+  </ol>
+
+  <!-- ─── ส่วนที่ 2 ─── -->
+  <div class="sec-head">2. ทำจดหมายเวียน (Mail Merge)</div>
+  <ol class="main-list">
+    <li>
+      <span class="n bold">2.1</span>
+      <span>นำไฟล์ wp1letter และไฟล์ wp1data address ที่กำหนดให้มาผนวก (Merge) ผนวกเป็นเอกสารใหม่เฉพาะลำดับที่ 1,3,5,7 และลำดับที่ 8 แล้วบันทึกชื่อ wp1merge &nbsp;ไฟล์เป็น pdf โดยให้ชื่อว่า wp3letter_Merge</span>
+    </li>
+  </ol>
+
+  <!-- ─── ส่วนที่ 3 ─── -->
+  <div class="sec-head">3. จ่าหน้าของจดหมาย</div>
+  <ol class="main-list">
+
+    <li><span class="n bold">3.1</span><span>กำหนดขนาดของซองจดหมายเป็น 11x22 cm.</span></li>
+
+    <li>
+      <span class="n bold">3.2</span>
+      <span>
+        ตั้งค่าหน้ากระดาษ (Page setup)
+        <span class="spec-inline">
+          <span>Top 2.75 cm.</span>
+          <span>Bottom 1.50 cm.</span>
+          <span>Left1.25 cm.</span>
+          <span>Right 1.50 cm.</span>
+        </span>
+      </span>
+    </li>
+
+    <li><span class="n bold">3.3</span><span>กำหนดตำแหน่ง Tab ที่ 7.00 cm. และ 9.00 cm.</span></li>
+
+    <li><span class="n bold">3.4</span><span>ที่อยู่ผู้ส่ง และ ที่ รง ๐๗๐๓/ อยู่มุมบนด้านซ้าย ใช้ Font TH SarabunPSK ขนาด 14 pt.(Point)</span></li>
+
+    <li><span class="n bold">3.5</span><span>เรียน และชื่อผู้รับ อยู่ใต้ ที่ รง ๐๗๐๓/ หนึ่งบรรทัด และอยู่ที่ตำแหน่ง Tab ที่ 7.00 cm. และ 9.00 cm. ตามลำดับ</span></li>
+
+    <li><span class="n bold">3.6</span><span>ที่อยู่ผู้รับใช้ Font TH SarabunPSK ขนาด 18 pt.(Point) ตัวหนา</span></li>
+
+    <li><span class="n bold">3.7</span><span>สร้างไฟล์จ่าหน้าซองจดหมายตามตัวอย่าง แล้วบันทึกไฟล์ชื่อ wp1envelop ไฟล์ .docx &nbsp;และ wp2envelop ไฟล์ .pdf</span></li>
+
+    <li><span class="n bold">3.8</span><span>นำไฟล์ wp1envelop และ wp1data address มาผนวก (Merge) เป็นเอกสารใหม่เฉพาะลำดับที่ 1,3,5,7 และ 8 และบันทึกชื่อ wp3merge_envelop</span></li>
+
+  </ol>
+
+  <!-- ─── bottom notes ─── -->
+  <div class="notes-row">
+    <div class="notes-box">
+      <p><strong>***หากผิด หักคะแนน 3 คะแนน</strong></p>
+      <p><strong>**ไฟล์เดอร์ต้องอยู่ใน Drive C เท่านั้น</strong></p>
+      <p><strong>***ไฟล์งานต้องครบ 6 ไฟล์</strong></p>
+    </div>
+
+    <div class="envelope-box">
+      <div class="env-top">
+        กลุ่มงานบุคลากร วิทยาลัยเทคนิคบางสะพาน<br>
+        อ.บ้านวังยาว ปข. ๑๐๕๐๐<br>
+        ที่ รง ๐๗๐๓/
+      </div>
+      <div class="env-recipient">
+        เรียน &nbsp;&nbsp; <span class="env-field">«ตำแหน่ง»</span><br>
+        &emsp;&emsp;&emsp; <span class="env-field">«หน่วยงาน»</span><br>
+        &emsp;&emsp;&emsp; <span class="env-field">«ที่อยู่»</span><br>
+        &emsp;&emsp;&emsp; <span class="env-field">«จังหวัด»</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
